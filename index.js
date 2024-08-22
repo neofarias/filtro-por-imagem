@@ -3,11 +3,14 @@ import { createClient } from 'pexels';
 const client = createClient('pXXo6ot2FU6CShvvpjQPBVowtdZIYEGs5ImcH37w0OrsaeA2POvAchIb');
 const query = "nature";
 
-let listaFotos = {};
+const resultadoPesquisa = client.photos.search({ query, per_page: 1 }).then(photosResult => {
+    return photosResult;
+});
 
-client.photos.search({ query, per_page: 1 }).then(photosResult => {
-    listaFotos = {...photosResult};
-    //console.log(listaFotos); //Mostra lindo o resultado
- });
+const fotos = async () => {
+    return resultadoPesquisa;
+};
 
-console.log(listaFotos); // Fica vazio!!!\
+const fotosEncontradas = await fotos();
+
+console.log(fotosEncontradas);
